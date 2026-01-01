@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 const skillBars = entry.target.querySelectorAll('.skill-progress');
                 skillBars.forEach(bar => {
-                    const width = bar.style.width;
+                    const targetWidth = bar.getAttribute('data-width') || bar.style.width;
                     bar.style.width = '0%';
                     setTimeout(() => {
-                        bar.style.width = width;
+                        bar.style.width = targetWidth;
                     }, 100);
                 });
                 skillsObserver.unobserve(entry.target);
@@ -144,8 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dynamic year in footer
     const currentYear = new Date().getFullYear();
     const footerText = document.querySelector('.footer p');
-    if (footerText && footerText.textContent.includes('2024')) {
-        footerText.textContent = footerText.textContent.replace('2024', currentYear);
+    if (footerText) {
+        footerText.textContent = `© ${currentYear} Phoenix Krn. All rights reserved.`;
     }
 
     // Log page load
